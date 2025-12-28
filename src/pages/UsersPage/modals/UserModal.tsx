@@ -20,24 +20,60 @@ export const UserModal = () => {
   const address = formatAddress(selectedUser.location);
 
   return (
-    <Dialog open={isOpen} onClose={handleClose} maxWidth="md" fullWidth>
+    <Dialog
+      open={isOpen}
+      onClose={handleClose}
+      maxWidth="md"
+      fullWidth
+      PaperProps={{
+        sx: {
+          borderRadius: 3,
+        },
+      }}
+    >
       <DialogTitle>
-        <Box display="flex" alignItems="center">
+        <Box
+          display="flex"
+          alignItems="center"
+          flexDirection={{ xs: 'column', sm: 'row' }}
+          gap={{ xs: 2, sm: 0 }}
+          textAlign={{ xs: 'center', sm: 'left' }}
+        >
           <Avatar
             src={selectedUser.picture.large}
             alt={fullName}
-            sx={{ width: 64, height: 64, mr: 2 }}
+            sx={{
+              width: { xs: 80, sm: 64 },
+              height: { xs: 80, sm: 64 },
+              mr: { xs: 0, sm: 2 },
+              border: '3px solid #6BDEA0',
+            }}
           />
           <Box>
-            <Typography variant="h5">{fullName}</Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 600,
+                fontSize: { xs: '1.25rem', sm: '1.5rem' },
+              }}
+            >
+              {fullName}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: '#6BDEA0',
+                mt: 0.5,
+                wordBreak: 'break-word',
+              }}
+            >
               {selectedUser.email}
             </Typography>
           </Box>
         </Box>
       </DialogTitle>
       <DialogContent>
-        <Divider sx={{ my: 2 }} />
+        <Divider sx={{ my: 2, borderColor: 'rgba(107, 222, 160, 0.2)' }} />
         <Box
           sx={{
             display: 'grid',
@@ -45,25 +81,50 @@ export const UserModal = () => {
               xs: '1fr',
               sm: 'repeat(2, 1fr)',
             },
-            gap: 2,
+            gap: 3,
           }}
         >
           <Box sx={{ gridColumn: { xs: '1', sm: '1 / -1' } }}>
-            <Typography variant="subtitle2" color="text.secondary">
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                mb: 0.5,
+                fontWeight: 600,
+              }}
+            >
               Phone Number
             </Typography>
-            <Typography variant="body1">{selectedUser.phone}</Typography>
+            <Typography variant="body1" sx={{ color: '#FFFFFF' }}>
+              {selectedUser.phone}
+            </Typography>
           </Box>
           <Box sx={{ gridColumn: { xs: '1', sm: '1 / -1' } }}>
-            <Typography variant="subtitle2" color="text.secondary">
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                mb: 0.5,
+                fontWeight: 600,
+              }}
+            >
               Full Address
             </Typography>
-            <Typography variant="body1">{address}</Typography>
+            <Typography variant="body1" sx={{ color: '#FFFFFF' }}>
+              {address}
+            </Typography>
           </Box>
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} variant="contained">
+      <DialogActions sx={{ px: 3, pb: 3 }}>
+        <Button
+          onClick={handleClose}
+          variant="contained"
+          sx={{
+            minWidth: { xs: '100%', sm: 120 },
+            py: 1.25,
+          }}
+        >
           Close
         </Button>
       </DialogActions>

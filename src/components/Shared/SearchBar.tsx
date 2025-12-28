@@ -35,7 +35,14 @@ export const SearchBar = () => {
         variant="outlined"
         value={localValue}
         onChange={handleChange}
-        sx={{ maxWidth: 600 }}
+        sx={{
+          maxWidth: { xs: '100%', sm: 600 },
+          '& .MuiOutlinedInput-root': {
+            '& input': {
+              color: '#FFFFFF',
+            },
+          },
+        }}
       />
     </Box>
   );

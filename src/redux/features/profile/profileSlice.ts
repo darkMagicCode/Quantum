@@ -4,12 +4,12 @@ import type { ProfileState } from '../../../types';
 import { updateProfile } from './profileThunks';
 
 const initialState: ProfileState = {
-  name: '',
-  phone: '',
-  jobTitle: '',
-  yearsOfExperience: 0,
-  address: '',
-  workingHours: '',
+  name: 'John Doe',
+  phone: '+1 (555) 123-4567',
+  jobTitle: 'Software Engineer',
+  yearsOfExperience: 5,
+  address: '123 Main Street, New York, NY 10001, USA',
+  workingHours: '9:00 AM - 5:00 PM',
   loading: false,
   success: false,
   error: null,

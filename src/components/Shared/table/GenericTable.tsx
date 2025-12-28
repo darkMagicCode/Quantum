@@ -24,11 +24,24 @@ export function GenericTable<T>({
   if (data.length === 0) {
     return (
       <Box textAlign="center" py={8}>
-        <Typography variant="h6" color="text.secondary">
+        <Typography
+          variant="h6"
+          sx={{
+            color: 'rgba(255, 255, 255, 0.7)',
+            fontSize: { xs: '1rem', sm: '1.25rem' },
+          }}
+        >
           {emptyMessage}
         </Typography>
         {emptyMessageSubtext && (
-          <Typography variant="body2" color="text.secondary" mt={1}>
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'rgba(255, 255, 255, 0.5)',
+              mt: 1,
+              fontSize: { xs: '0.875rem', sm: '1rem' },
+            }}
+          >
             {emptyMessageSubtext}
           </Typography>
         )}
@@ -37,15 +50,50 @@ export function GenericTable<T>({
   }
 
   return (
-    <TableContainer component={Paper} elevation={elevation} sx={sx}>
-      <Table sx={{ minWidth: 650 }} aria-label="table">
+    <TableContainer
+      component={Paper}
+      elevation={elevation}
+      sx={{
+        ...sx,
+        overflowX: 'auto',
+        '&::-webkit-scrollbar': {
+          height: 8,
+        },
+        '&::-webkit-scrollbar-track': {
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: 'rgba(107, 222, 160, 0.3)',
+          borderRadius: 4,
+          '&:hover': {
+            backgroundColor: 'rgba(107, 222, 160, 0.5)',
+          },
+        },
+      }}
+    >
+      <Table
+        sx={{
+          minWidth: { xs: 600, sm: 650 },
+          '& .MuiTableCell-root': {
+            color: '#FFFFFF',
+            borderColor: 'rgba(107, 222, 160, 0.1)',
+            fontSize: { xs: '0.875rem', sm: '1rem' },
+            py: { xs: 1, sm: 1.5 },
+          },
+        }}
+        aria-label="table"
+      >
         <TableHead>
           <TableRow>
             {columns.map((column) => (
               <TableCell
                 key={column.id}
                 align={column.align}
-                style={{ minWidth: column.minWidth }}
+                sx={{
+                  minWidth: column.minWidth,
+                  fontWeight: 600,
+                  fontSize: { xs: '0.875rem', sm: '1rem' },
+                }}
               >
                 {column.label}
               </TableCell>
@@ -62,8 +110,11 @@ export function GenericTable<T>({
                 sx={{
                   cursor: onRowClick ? 'pointer' : 'default',
                   '&:hover': {
-                    backgroundColor: onRowClick ? 'action.hover' : 'transparent',
+                    backgroundColor: onRowClick
+                      ? 'rgba(107, 222, 160, 0.1)'
+                      : 'transparent',
                   },
+                  transition: 'background-color 0.2s ease',
                 }}
                 onClick={() => onRowClick?.(row)}
               >
@@ -81,7 +132,13 @@ export function GenericTable<T>({
                   }
 
                   return (
-                    <TableCell key={column.id} align={column.align}>
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      sx={{
+                        wordBreak: { xs: 'break-word', sm: 'normal' },
+                      }}
+                    >
                       {cellContent}
                     </TableCell>
                   );

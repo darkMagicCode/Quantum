@@ -9,13 +9,30 @@ export const UsersPage = () => {
   useUsers();
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Container
+      maxWidth="lg"
+      sx={{
+        py: { xs: 2, sm: 4 },
+        px: { xs: 1, sm: 2 },
+      }}
+    >
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{
+          fontWeight: 700,
+          mb: { xs: 2, sm: 3 },
+          fontSize: { xs: '1.75rem', sm: '2.125rem' },
+        }}
+      >
         Users
       </Typography>
-      <Box mt={4}>
+      <Box mt={{ xs: 2, sm: 4 }}>
         <SearchBar />
-        <UserList />
+        <Box sx={{ mt: { xs: 2, sm: 3 } }}>
+          <UserList />
+        </Box>
         <Pagination />
       </Box>
       <UserModal />

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { updateProfile } from '../../../redux/features/profile';
 import { profileSchema, type ProfileFormData } from '../schemas';
@@ -9,28 +9,23 @@ export const useProfile = () => {
   const dispatch = useAppDispatch();
   const profile = useAppSelector((state) => state.profile);
 
+  const defaultValues = useMemo<ProfileFormData>(() => ({
+    name: profile.name,
+    phone: profile.phone,
+    jobTitle: profile.jobTitle,
+    yearsOfExperience: profile.yearsOfExperience,
+    address: profile.address,
+    workingHours: profile.workingHours,
+  }), [profile.name, profile.phone, profile.jobTitle, profile.yearsOfExperience, profile.address, profile.workingHours]);
+
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
-    defaultValues: {
-      name: profile.name,
-      phone: profile.phone,
-      jobTitle: profile.jobTitle,
-      yearsOfExperience: profile.yearsOfExperience,
-      address: profile.address,
-      workingHours: profile.workingHours,
-    },
+    defaultValues,
   });
 
   useEffect(() => {
-    form.reset({
-      name: profile.name,
-      phone: profile.phone,
-      jobTitle: profile.jobTitle,
-      yearsOfExperience: profile.yearsOfExperience,
-      address: profile.address,
-      workingHours: profile.workingHours,
-    });
-  }, [profile, form]);
+    form.reset(defaultValues);
+  }, [defaultValues, form]);
 
   const onSubmit = (data: ProfileFormData) => {
     dispatch(updateProfile(data));

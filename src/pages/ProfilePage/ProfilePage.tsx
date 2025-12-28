@@ -24,12 +24,27 @@ export const ProfilePage = () => {
   } = form;
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Container
+      maxWidth="md"
+      sx={{
+        py: { xs: 2, sm: 4 },
+        px: { xs: 1, sm: 2 },
+      }}
+    >
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{
+          fontWeight: 700,
+          mb: { xs: 2, sm: 3 },
+          fontSize: { xs: '1.75rem', sm: '2.125rem' },
+        }}
+      >
         Edit Profile
       </Typography>
 
-      <Paper elevation={3} sx={{ p: 4 }}>
+      <Paper elevation={0} sx={{ p: { xs: 3, sm: 4 } }}>
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <Box
             sx={{
@@ -160,11 +175,18 @@ export const ProfilePage = () => {
                 variant="contained"
                 size="large"
                 disabled={profile.loading}
-                sx={{ mt: 2 }}
+                sx={{
+                  mt: 2,
+                  py: 1.5,
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  width: { xs: '100%', sm: 'auto' },
+                  minWidth: { xs: '100%', sm: 200 },
+                }}
               >
                 {profile.loading ? (
                   <>
-                    <CircularProgress size={20} sx={{ mr: 1 }} />
+                    <CircularProgress size={20} sx={{ mr: 1 }} color="inherit" />
                     Saving...
                   </>
                 ) : (
